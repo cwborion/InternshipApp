@@ -45,6 +45,7 @@ export const getJobs = (companyid) => {
 };
 
 // UPDATE / edit jobs
+
 export const updateJob = (id, data) => {
   console.log('id sent in is ', id);
   return fetch(`http://localhost:3001/job/${id}`, {
@@ -52,14 +53,13 @@ export const updateJob = (id, data) => {
     mode: 'CORS',
     body: JSON.stringify(data),
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
   }).then(res => {
     return res;
   }).catch(err => err);
 };
-
-///// working above still
 
 // ------------------------------------------------
 
@@ -78,11 +78,12 @@ export const updateJob = (id, data) => {
 //   }).catch(err => {console.log('Error: ', err)});
 // };
 
-export const deleteJob = (jobid) => {
+export const deleteJob = (jobid, data) => {
+  console.log('jobid sent in is ', jobid)
   return fetch(`http://localhost:3001/job/${jobid}`, {
     method: 'DELETE',
     mode: 'CORS',
-    body: JSON.stringify(jobid)
+    body: JSON.stringify(data)
   })
     .then(response => response.json())
     .then(data => {

@@ -1,21 +1,10 @@
 import React from 'react';
 import EmpJob from './EmpJob';
 import { getJobs } from '../actions/employerActions';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import Toggle from 'material-ui/Toggle';
+import { CardText } from 'material-ui/Card';
 import Paper from 'material-ui/Paper';
-import {List, ListItem} from 'material-ui/List';
+import { List } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-
-
-const style = {
-  height: 100,
-  width: 400,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block',
-};
-
 
 export default class EmpListJobs extends React.Component {
 	constructor(props) {

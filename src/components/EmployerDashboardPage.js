@@ -2,15 +2,10 @@ import React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import Toggle from 'material-ui/Toggle';
 import EmployerHeader from './EmployerHeader';
 import { Link } from 'react-router-dom';
 
 import FontIcon from 'material-ui/FontIcon';
-import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
-
-import Avatar from 'material-ui/Avatar';
-import FileFolder from 'material-ui/svg-icons/file/folder';
 
 import SearchBar from 'material-ui-search-bar';
 
@@ -89,7 +84,6 @@ export default class EmployerDashboardPage extends React.Component {
               }}
               hintText="Search ACC student body for skills or fields of proficiency"
             />
-            <textarea>this is where search results for student qualifications/skills will be populated.  Each student returned by the search will be a link to a dialog modal that will contain a link to the student's linkdIn profile.</textarea>
           </CardText>
           <CardActions>
             <FlatButton label="Expand" onClick={this.handleExpand} />

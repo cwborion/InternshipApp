@@ -1,5 +1,4 @@
 import React from 'react';
-import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -80,76 +79,64 @@ class EditEmployerAcctPage extends React.Component {
   render() {
     return (
       <div>
-        <EmployerHeader />
+        <EmployerHeader />        
         <h2>Edit Your Account Information</h2>
-        <p>Company logo:
-        		<FloatingActionButton mini={true} style={style}>
+      		<FloatingActionButton mini={true} style={style}>
             <ContentAdd />
           </FloatingActionButton>
-        </p>
-
-        <form onSubmit={this.handleSubmit}>
-
-          <p>First Name:
-            <TextField
-              name="firstName"
-              hintText="First name"
-              onChange={this.handleFirstNameUpdate}
-              value={this.state.firstName}
-            />
-          </p>
-          <p>Last Name:
-            <TextField
-              name="lastName"
-              hintText="Last name"
-              onChange={this.handleLastNameUpdate}
-              value={this.state.lastName}
-            />
-          </p>
-          <p>Company Name:
-            <TextField
-              name="companyName"
-              hintText="Enter company name"
-              onChange={this.handleCompanyNameUpdate}
-              value={this.state.companyName}
-            />
-          </p>
-          <p>Email:
-            <TextField
-              name="email"
-              type="email"
-              hintText="Must use ACC email"
-              onChange={this.handleEmailUpdate}
-              value={this.state.email}
-            />
-          </p>
-          <p>Password:
-            <TextField
-              name="password"
-              type="password"
-              hintText="Password requirements go here"
-              onChange={this.handlePasswordUpdate}
-              value={this.state.password}
-            />
-          </p>
-          <p>Re-type password:
-            <TextField
-              name="retypePassword"
-              type="password"
-              hintText="Re-enter password for veriication"
-              onChange={this.handleRetypePasswordUpdate}
-              value={this.state.retypePassword}
-            />
-          </p>
-          <p>URL: 
+        <form onSubmit={this.handleSubmit}>          
+          <TextField
+            name="firstName"
+            hintText="First name"
+            onChange={this.handleFirstNameUpdate}
+            value={this.state.firstName}
+          />
+          <br />
+          <TextField
+            name="lastName"
+            hintText="Last name"
+            onChange={this.handleLastNameUpdate}
+            value={this.state.lastName}
+          />          
+          <br />
+          <TextField
+            name="companyName"
+            hintText="Enter company name"
+            onChange={this.handleCompanyNameUpdate}
+            value={this.state.companyName}
+          />
+          <br />
+          <TextField
+            name="email"
+            type="email"
+            hintText="Must use ACC email"
+            onChange={this.handleEmailUpdate}
+            value={this.state.email}
+          />
+          <br />
+          <TextField
+            name="password"
+            type="password"
+            hintText="Password requirements go here"
+            onChange={this.handlePasswordUpdate}
+            value={this.state.password}
+          />
+          <br />
+          <TextField
+            name="retypePassword"
+            type="password"
+            hintText="Re-enter password for veriication"
+            onChange={this.handleRetypePasswordUpdate}
+            value={this.state.retypePassword}
+          />
+          <br />
           <TextField 
             name="url"
             hintText="Enter URL" 
             onChange={this.handleUrlUpdate} 
             value={this.state.url} 
           />
-        </p>
-
+          <br />
           <RaisedButton
             containerElement={<Link to="/employer/dash" />}
             label="Cancel"

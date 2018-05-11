@@ -1,9 +1,6 @@
 import React from 'react';
-import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import StudentHeader from './StudentHeader';
 import { Link } from 'react-router-dom';
 
@@ -42,7 +39,7 @@ class EditStudentAcctPage extends React.Component {
       + this.state.lastName + ' | '
       + this.state.email + ' | '
       + this.state.password + ' | '
-      + this.state.retypePassword + ' | ' 
+      + this.state.retypePassword + ' | '
       + this.state.fieldOfStudy + ' | '
       + this.state.skills + ' |'
     );
@@ -50,129 +47,128 @@ class EditStudentAcctPage extends React.Component {
   }
 
   handleFirstNameUpdate(event) {
-    this.setState({firstName: event.target.value});
+    this.setState({ firstName: event.target.value });
   }
 
   handleLastNameUpdate(event) {
-    this.setState({lastName: event.target.value});
+    this.setState({ lastName: event.target.value });
   }
 
   handleEmailUpdate(event) {
-    this.setState({email: event.target.value});
+    this.setState({ email: event.target.value });
   }
 
   handlePasswordUpdate(event) {
-    this.setState({password: event.target.value});
+    this.setState({ password: event.target.value });
   }
 
   handleRetypePasswordUpdate(event) {
-    this.setState({retypePassword: event.target.value});
+    this.setState({ retypePassword: event.target.value });
   }
 
   handleFieldOfStudyUpdate(event) {
-    this.setState({fieldOfStudy: event.target.value});
+    this.setState({ fieldOfStudy: event.target.value });
   }
 
   handleSkillsUpdate(event) {
-    this.setState({skills: event.target.value});
+    this.setState({ skills: event.target.value });
   }
 
   render() {
     return (
-      <div> 
+      <div>
         <StudentHeader />
         <h2>Edit Your Account Information</h2>
         <form onSubmit={this.handleSubmit}>
-        <p>First Name:                      
-          <TextField 
-          //this field represents possible v2 for each field
+          <TextField
+            //this field represents possible v2 for each field
+            floatingLabelText='First Name'
             name='firstName'
             type='text'
             hintText='Name to be edited'
             value={this.state.firstName}
-            onChange={this.handleFirstNameUpdate} 
-          />                       
-        </p>
-
-        <p>Last Name:         
-          <TextField 
+            onChange={this.handleFirstNameUpdate}
+          />
+          <br />
+          <TextField
+            floatingLabelText='Last Name'
             name='lastName'
             type='text'
-            hintText='Name to be edited'                    
+            hintText='Name to be edited'
             value={this.state.lastName}
-            onChange={this.handleLastNameUpdate} 
-          />                      
-        </p>
+            onChange={this.handleLastNameUpdate}
+          />
 
-        <p>Email:                     
-          <TextField 
+          <br />
+          <TextField
+            floatingLabelText='Email'
             name='email'
             type='email'
             hintText='Email to be edited, must be ACC email'
-            value={this.state.email} 
-            onChange={this.handleEmailUpdate} 
-          />                      
-        </p>  
+            value={this.state.email}
+            onChange={this.handleEmailUpdate}
+          />
 
-        <p>Password:                 
-          <TextField 
+          <br />
+          <TextField
+            floatingLabelText='Password'
             name='password'
             type='password'
-            hintText="password to be edited" 
-            value={this.state.password} 
-            onChange={this.handlePasswordUpdate} 
-          />                      
-        </p>  
-          
-        <p>Re-type Password:                     
-          <TextField 
+            hintText="password to be edited"
+            value={this.state.password}
+            onChange={this.handlePasswordUpdate}
+          />
+
+          <br />
+          <TextField
+            floatingLabelText='Retype Password'
             name='password'
             type='password'
-            hintText='retype password to be edited' 
-            value={this.state.retypePassword} 
-            onChange={this.handleRetypePasswordUpdate} 
-          />                      
-        </p>
+            hintText='retype password to be edited'
+            value={this.state.retypePassword}
+            onChange={this.handleRetypePasswordUpdate}
+          />
 
-        <p>Major/Field of Study:            
-          <TextField 
+          <br />
+          <TextField
             //future version may include major selector from prepopulated list
+            floatingLabelText='Major/Field of Study'
             name='major'
             type='text'
-            hintText="field of study to edit" 
-            value={this.state.fieldOfStudy} 
-            onChange={this.handleFieldOfStudyUpdate} 
-          />                        
-        </p>
+            hintText="field of study to edit"
+            value={this.state.fieldOfStudy}
+            onChange={this.handleFieldOfStudyUpdate}
+          />
 
-        <p>Skills:                      
-          <TextField 
+          <br />
+          <TextField
             //future version may include checkbox to select from prepopulated list
+            floatingLabelText='Skills'
             name='skills'
             type='text'
             hintText='skills to edit'
             multiLine={false}
             //rows={2}
             fullWidth={false}
-            value={this.state.skills} 
-            onChange={this.handleSkillsUpdate} 
-          />                         
-        </p>
-      
-        <RaisedButton 
-          containerElement={<Link to="/student/dash" />} 
-          label="Cancel" 
-          primary={true} 
-          style={style} 
-        />
-        <RaisedButton 
-          type="submit"
-          label="Update & Save" 
-          secondary={true} 
-          style={style} 
-        />
+            value={this.state.skills}
+            onChange={this.handleSkillsUpdate}
+          />
 
-      </form>
+          <br />
+          <RaisedButton
+            containerElement={<Link to="/student/dash" />}
+            label="Cancel"
+            primary={true}
+            style={style}
+          />
+          <RaisedButton
+            type="submit"
+            label="Update & Save"
+            secondary={true}
+            style={style}
+          />
+
+        </form>
       </div>
 
     );

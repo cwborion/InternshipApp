@@ -38,7 +38,6 @@ class EmpCreatePostPage extends React.Component {
         <h2>Jorb Creator 9000</h2>
 
 			<form onSubmit={this.handleSubmit}>
-        <p>
 					<TextField 
 						name='jobTitle'
 						type='text'
@@ -49,9 +48,7 @@ class EmpCreatePostPage extends React.Component {
 						onChange={this.handleChange}
             value={this.state.jobTitle}
         	/>
-        </p>
-
-				<p> 
+					<br />
         	<TextField
 						name='companyName'
 						type='text'
@@ -61,8 +58,7 @@ class EmpCreatePostPage extends React.Component {
 						onChange={this.handleChange}
             value={this.state.companyName}
 			    />
-    		</p>
-        <p> 
+					<br />
 					<TextField 
 						name='url'
 						type='text'
@@ -72,8 +68,7 @@ class EmpCreatePostPage extends React.Component {
 						onChange={this.handleChange}
             value={this.state.url}
         	/>
-        </p>
-        <p>
+					<br />
 					<TextField 
 						name='location'
 						type='text'
@@ -83,8 +78,7 @@ class EmpCreatePostPage extends React.Component {
 						onChange={this.handleChange}
             value={this.state.location}
         	/>
-        </p>
-        <p>
+					<br />
         	<TextField
 						name='jobDescription'
 						type='text'
@@ -97,9 +91,7 @@ class EmpCreatePostPage extends React.Component {
 						onChange={this.handleChange}
             value={this.state.jobDescription}
 			    />
-    		</p>
-
-    		<p>
+					<br />
 					<TextField 
 						name='skills'
 						type='text'
@@ -109,8 +101,7 @@ class EmpCreatePostPage extends React.Component {
 						onChange={this.handleChange}
             value={this.state.skills}
     			/>
-    		</p>
-        
+					<br />
 				
 				<RaisedButton 
 					label="Submit" 

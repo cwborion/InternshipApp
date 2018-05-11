@@ -7,7 +7,7 @@ import EmployerDropDownNav from './EmployerDropDownNav';
 import RightDropDownNav from './RightDropDownNav';
 
 import SearchBar from 'material-ui-search-bar';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import { ToolbarGroup } from 'material-ui/Toolbar';
 
 const MyNavLinks = () => (
   <ToolbarGroup>
@@ -19,7 +19,7 @@ const MyNavLinks = () => (
         maxWidth: 800
       }}
     />
-    <FlatButton containerElement={<RightDropDownNav />}/>
+    <FlatButton label='RightDropDownNav' containerElement={<RightDropDownNav />}/>
   </ToolbarGroup> 
 );
 

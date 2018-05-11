@@ -1,44 +1,32 @@
 import React from 'react';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardText } from 'material-ui/Card';
 import Toggle from 'material-ui/Toggle';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import EmpEditPostPage from './EmpEditPostPage';
-import { Link } from 'react-router-dom';
-import {List, ListItem} from 'material-ui/List';
 
 import { deleteJob } from '../actions/employerActions';
 
 export default class EmpJob extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state= {
-			expanded: false,
-			open: false,
-			openModal: false
+    this.handleUpdate = this.handleUpdate.bind(this)
+		this.state = {
+			jobCard: false,
+			updateModal: false,
+			deleteModal: false
 		}
 	}
 
-	handleExpandChange = (expanded) => {
-    this.setState({ expanded: expanded });
-  };
-
   handleToggle = (event, toggle) => {
-    this.setState({ expanded: toggle });
+    this.setState({ jobCard: toggle });
   };
 
-  handleExpand = () => {
-    this.setState({ expanded: true });
-  };
-
-  handleReduce = () => {
-    this.setState({ expanded: false });
-  };
-
-  handleOpen = () => {
+  handleUpdate = (event) => {
+    event.preventDefault();
     this.setState({
-      open: true,
+      updateModal: !this.state.updateModal
     });
   };
 
@@ -50,34 +38,37 @@ export default class EmpJob extends React.Component {
   };
 
   deleteConfirm = () => {
-  	this.setState({ openModal: !this.state.openModal })
+  	this.setState({ deleteModal: !this.state.deleteModal })
   };
 
-  handleDeleteJob = (event) => {
-    deleteJob(this.state);
+  handleDeleteJob = (jobid) => {
+    console.log('jobid is ', jobid);
+    console.log('state in EmpJob.js is ', this.state);
+    deleteJob(jobid);
   }
 
 // functions to write job props to state to pass into child component
 
 	render () {
 		var {job} = this.props;
-		const actions = [
-      // <RaisedButton
-      //   label="Cancel"
-      //   secondary={true}
-      //   containerElement={<Link to="/employer/dash" />}
-      //   onClick={this.handleClose}
+		// const actions = [
+    //   <RaisedButton
+    //     label="Cancel"
+    //     secondary={true}
+    //     containerElement={<Link to="/employer/dash" />}
+    //     onClick={this.handleClose}
 
-      // />,
-      // <RaisedButton
-      //   label="Submit"
-      //   primary={true}
-      //   keyboardFocused={true}
-      //   onClick={this.handleClose}
-      // />
-    ];
+    //   />,
+    //   <RaisedButton
+    //     label="Submit"
+    //     primary={true}
+    //     keyboardFocused={true}
+    //     onClick={this.handleClose}
+    //   />
+    // ];
 
 // modalActions grants options to the actions value in modal each job populates in
+
     const modalActions = [
     	<FlatButton
     		label='Cancel'
@@ -88,70 +79,58 @@ export default class EmpJob extends React.Component {
     	<FlatButton
     		label='Delete'
     		primary={true}
-    		disabled={true}
-    		onClick={this.handleDeleteJob}
+    		// disabled={true}
+    		onClick={() => { this.handleDeleteJob(job._id)}}
     	/>
     ]
-		
+
 		return(
 			<div>
         <Dialog
           title='Edit Job Post'
-          actions={actions}
+          // actions={actions}
           modal={false}
-          open={this.state.open}
+          open={this.state.updateModal}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          <EmpEditPostPage job={this.props.job} />
+          <EmpEditPostPage job={this.props.job} handleOpen={this.handleUpdate}/>
         </Dialog>
-				<Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+				<Card expanded={this.state.jobCard}  >
 
 					<CardText>
             <Toggle
-              toggled={this.state.expanded}
+              toggled={this.state.jobCard}
               onToggle={this.handleToggle}
-              labelPosition="right"
+              labelPosition='right'
               label={job.jobTitle}
             />
           </CardText>
-	          <CardText expandable={true}>
-	          	
-	          	<div>
-	          		<h5>{job.timePosted}</h5>
-	          	</div>
-	          	<div>
-	          		<h5>{job.location}</h5>
-	          	</div>
-	          	<div>
-	          		<h5>{job.skills}</h5>
-	          	</div>
-	          	<div>
-	          		<h5>{job.jobDescription}</h5>
-	          	</div>	          	
-							 <div>
-								<FlatButton label='Update' primary={true} onClick={this.handleOpen}
+          <CardText expandable={true}>
+        		<h5>{job.timePosted}</h5>
+        		<h5>{job.location}</h5>
+        		<h5>{job.skills}</h5>
+        		<h5>{job.jobDescription}</h5>
+					
+						<FlatButton label='Update' primary={true} onClick={this.handleUpdate}/>
 
-									// ANOTHER FUNCTION NEEDS TO HAPPEN HERE TO SET STATE 
+            <RaisedButton 
+              label='Delete' 
+              secondary={true} 
+              onClick={this.deleteConfirm}
+            />
+		        <Dialog
+		          title='Are you sure you want to delete this post?'
+		          actions={modalActions}
+		          modal={true}
+		          open={this.state.deleteModal}
+		        >
+		          Click Delete button to confirm.
+		        </Dialog>
+        	</CardText>
 
-								 />
-
-								<RaisedButton label="Delete" secondary={true} onClick={this.deleteConfirm} />
-				        <Dialog
-				          title='Are you sure you want to delete this post?'
-				          actions={modalActions}
-				          modal={true}
-				          open={this.state.openModal}
-				        >
-				          Click Delete button to confirm.
-				        </Dialog>
-
-								
-						  </div>
-	        	</CardText>
         </Card>
 			</div>
 		)
 	}
 }
-

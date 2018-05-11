@@ -71,8 +71,8 @@ class LoginPage extends React.Component {
             onChange={this.handlePasswordChange}
           />
         </div>
-        
-        <a href="#">forgot password?</a>
+        {/* href="#" below till link is put in place */}
+        <a>forgot password?</a>
         <br />
         <RaisedButton 
           label="Login" 

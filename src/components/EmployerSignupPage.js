@@ -1,5 +1,4 @@
 import React from 'react';
-import Divider from 'material-ui/Divider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -45,15 +44,14 @@ class EmployerSignupPage extends React.Component {
         <h1>EmployerSignupPage.js</h1>
         <h2>Tell us a little about yourself...</h2>
 
-        <p>Company logo:
+        <span>Company logo:
         		<FloatingActionButton mini={true} style={style}>
             <ContentAdd />
           </FloatingActionButton>
-        </p>
+        </span>
 
         <form  onSubmit={this.handleSubmit}>
 
-        <p>
           <TextField
             name='companyName'
             type='text'
@@ -62,9 +60,7 @@ class EmployerSignupPage extends React.Component {
             value={this.state.companyName}
             onChange={this.handleChange}
           />
-        </p>
-
-        <p>
+          <br />
           <TextField
             name='firstName'
             type='text'
@@ -73,9 +69,7 @@ class EmployerSignupPage extends React.Component {
             value={this.state.firstName}
             onChange={this.handleChange}
           />
-        </p>
-
-        <p>
+          <br />
           <TextField
             name='lastName'
             type='text'
@@ -84,9 +78,7 @@ class EmployerSignupPage extends React.Component {
             value={this.state.lastName}
             onChange={this.handleChange}
           />
-        </p>
-
-        <p>
+          <br />
           <TextField
             name='email'
             type='email'
@@ -95,9 +87,7 @@ class EmployerSignupPage extends React.Component {
             value={this.state.email}
             onChange={this.handleChange}
           />
-        </p>
-
-        <p>
+          <br />
           <TextField
             name='password'
             type='password'
@@ -106,9 +96,7 @@ class EmployerSignupPage extends React.Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
-        </p>
-
-        <p>
+          <br />
           <TextField
             // updated this textfield to match password above
             // this field is not saving data, only validating against password
@@ -119,9 +107,7 @@ class EmployerSignupPage extends React.Component {
             value={this.state.retypePassword}
             onChange={this.handleChange}
           />
-        </p>
-
-        <p>
+          <br />
           <TextField
             name='url'
             type='text'
@@ -130,8 +116,7 @@ class EmployerSignupPage extends React.Component {
             value={this.state.url}
             onChange={this.handleChange}
           />
-        </p>
-
+          <br />
         <RaisedButton
           label="Submit"
           primary={true}

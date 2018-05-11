@@ -33,7 +33,7 @@ var url = 'mongodb://jason.jiron:milkshake8@ds225078.mlab.com:25078/killerbs';
 
 mongoose.connect(url, function (err) {
   if (err) throw err;
-  console.log('Successfully connected to mLab Mongo db');
+  console.log('mLab is now connected to MongoDB');
 });
 
 const Employer = mongoose.model('Employer', EmployerSchema);
@@ -68,13 +68,13 @@ app.post('/student/signup', (req, res) => {
       skills: req.body.skills
     }
   )
-  .then(data => {
-    console.log('Data retunred from Student signup', data);
-    res.json(data);
-  })
-  .catch(err => {
-    res.json({ code: 400, message: "Student signup failed", error: err});
-  });
+    .then(data => {
+      console.log('Data retunred from Student signup', data);
+      res.json(data);
+    })
+    .catch(err => {
+      res.json({ code: 400, message: "Student signup failed", error: err });
+    });
 });
 
 
@@ -84,7 +84,7 @@ app.get('/student', (req, res) => {
   Student.find((err, students) => {
     if (err)
       res.send(err);
-      res.json(students);
+    res.json(students);
   })
 });
 
@@ -118,7 +118,7 @@ app.get('/employer', (req, res) => {
   Employer.find((err, employers) => {
     if (err)
       res.send(err);
-      res.json(employers);
+    res.json(employers);
   });
 });
 
@@ -135,7 +135,7 @@ app.get('/employer/:employer_id', (req, res) => {
 });
 
 // employer update account form PUT ---------------------------------------------------
-  // be sure to set values in Postman if testing with Postman under the Body tab below the url path bar
+// be sure to set values in Postman if testing with Postman under the Body tab below the url path bar
 
 app.put('/employer/:employer_id', (req, res) => {
   Employer.findById(req.params.employer_id, (err, employer) => {
@@ -182,13 +182,13 @@ app.get('/job', (req, res) => {
   // var { limit } = req.query;
   // var  companyid  = req.query;
   var companyid = "5a975d329bfa160783522cdf" // not sure what to do with this stuff
-  Job.find({companyId: companyid}).
-  limit(20).
-  sort({ timePosted: -1 }).
-  exec((err, data)=>{
-    if(err) return (err);
-    res.json(data);
-  });
+  Job.find({ companyId: companyid }).
+    limit(20).
+    sort({ timePosted: -1 }).
+    exec((err, data) => {
+      if (err) return (err);
+      res.json(data);
+    });
 })
 
 // GET for job with specific ID
@@ -228,24 +228,16 @@ app.post('/job', (req, res) => {
 // PUT route for updating Job Post below /---------------------------------------------
 
 app.put('/job/:job_id', (req, res) => {
-  Job.findById(req.params.job_id, (err, job) => {
-    job.jobTitle = req.body.jobTitle;
-    job.jobDescription = req.body.jobDescription;
-    job.skills = req.body.skills;
-    job.url = req.body.url;
-    job.location = req.body.location;
-    console.log(job);
-    // save info
-    job.save((err) => {
-      if (err)
-        res.send(err);
-
-      res.json({ message: 'Job post information updated.' });
-    });
-
-  });
+  Job.findByIdAndUpdate(
+    req.params.job_id,
+    req.body,
+    { new: true },
+    (err, job) => {
+      if (err) return res.status(500).send(err);
+      return res.send(job);
+    }
+  )
 });
-
 // PUT route for updating Job Post above /---------------------------------------------
 
 
@@ -253,15 +245,26 @@ app.put('/job/:job_id', (req, res) => {
 // DELETE route  below for deletion of job post by employer /--------------------------
 
 app.delete('/job/:job_id', (req, res) => {
-  Job.remove({
-    _id: req.params.job_id
-  }, (err, job) => {
-    if (err)
-      res.send(err);
-
-    res.json({ message: 'Job post successfully deleted.' });
-  });
+  Job.findByIdAndRemove(req.params.job_id, (err, job) => {
+    if (err) return res.status(400).send(err);
+    const response = {
+      message: "Job successfully deleted",
+      id: job._id
+    };
+    return res.status(200).send(response);
+  })
 });
+
+// app.delete('/job/:job_id', (req, res) => {
+//   Job.remove({
+//     _id: req.params.job_id
+//   }, (err, job) => {
+//     if (err)
+//       res.send(err);
+
+//     res.json({ message: 'Job post successfully deleted.' });
+//   });
+// });
 
 // DELETE route  above for deletion of job post by employer /--------------------------
 
@@ -296,5 +299,5 @@ app.delete('/student/login/:id', (req, res) => { });
 //
 
 app.listen(port, () => {
-  console.log(`Started up at ${port}`);
+  console.log(`Server is running on port: ${port}`);
 });

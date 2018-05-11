@@ -1,127 +1,104 @@
 import React from 'react';
-import TextField from 'material-ui/TextField';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import Divider from 'material-ui/Divider';
-import FontIcon from 'material-ui/FontIcon';
 import StudentHeader from './StudentHeader';
 import { Link } from 'react-router-dom';
 
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+import FontIcon from 'material-ui/FontIcon';
 
-const buttonStyle = {
-  margin: 12,
-  width: 200
-}
+import SearchBar from 'material-ui-search-bar';
 
-const tableStyle = {
-  width: 1250,
-  margin: 'auto',
-  marginTop: 30,
-  textAlign: 'center',
-  backgroundColor: 'rgba(0, 188, 212, 0.20)'
+import EmpListJobs from './EmpListJobs';
 
-};
-const table = {
-  width: '100%'
-};
+const dashIcon = <FontIcon className="material-icons" >dashboard</FontIcon>;
+
 const style = {
   margin: 12,
-  width: 800
 };
 
-// caleb added this const
-  const styles = {
-    button: {
-      margin: 12,
-    },
-    exampleImageInput: {
-      cursor: 'pointer',
-      position: 'absolute',
-      top: 0,
-      bottom: 0,
-      right: 0,
-      left: 0,
-      width: '100%',
-      opacity: 0,
-    },
+export default class EmployerDashboardPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: false,
+    };
+  }
+
+  handleExpandChange = (expanded) => {
+    this.setState({ expanded: expanded });
   };
 
-class DashStudentPage extends React.Component {
-  state = {
-    selected: [1],
+  handleToggle = (event, toggle) => {
+    this.setState({ expanded: toggle });
   };
 
-  isSelected = (index) => {
-    return this.state.selected.indexOf(index) !== -1;
+  handleExpand = () => {
+    this.setState({ expanded: true });
   };
 
-  handleRowSelection = (selectedRows) => {
-    this.setState({
-      selected: selectedRows,
-    });
+  handleReduce = () => {
+    this.setState({ expanded: false });
   };
 
-
-  render () {
+  render() {
     return (
-    <div>
-      <StudentHeader />
-      <Divider />
       <div>
-        <h1>Welcome Back USER NAME</h1>
-        <p>Search:
-          <TextField style={style}
-            hintText="FIND A JOB"
+        <StudentHeader />
+        <h1>Welcome student.firstName</h1>
+        <h6>For now the Employer Dashboard is being used for the Student Dashboard. Ideally we would 
+        build a universal dashboard that could be shared.</h6>
+        <Card expanded={true} >
+          <CardHeader
+            title="Manage your job posts"
+            subtitle="Find the right hire!"
+            avatar={dashIcon}
           />
-        </p>
-      </div>
-      <RaisedButton label="Search" primary={true} style={buttonStyle} />
+          
+          <CardMedia
+            expandable={true}
+            overlay={<CardTitle title="Dashboard" subtitle="Hire students in Austin!" />}
+          >
+            {/* change picture if deployed officially, not legal without request of artist */}
+            <img src="http://daveteller.com/wp-content/uploads/2015/05/skyline-cyberpunk-20x10.jpg" alt="" />
+          </CardMedia>
+          
+          <CardText expandable={true}>
+            <RaisedButton 
+              containerElement={<Link to="/create/post" />}
+              label="Create New Job Post" 
+              secondary={true} 
+              style={style} 
+            />
+            {/* below styling may eventually be overwritten in a css file */}
 
-        <div style={table}>
-        <Table style={tableStyle} onRowSelection={this.handleRowSelection}>
-          <TableHeader>
-            <TableRow>
-              <TableHeaderColumn>ID</TableHeaderColumn>
-              <TableHeaderColumn>Name</TableHeaderColumn>
-              <TableHeaderColumn>Status</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow selected={this.isSelected(0)}>
-              <TableRowColumn>1</TableRowColumn>
-              <TableRowColumn>Job 1</TableRowColumn>
-              <TableRowColumn>Apple</TableRowColumn>
-            </TableRow>
-            <TableRow selected={this.isSelected(1)}>
-              <TableRowColumn>2</TableRowColumn>
-              <TableRowColumn>Job 2</TableRowColumn>
-              <TableRowColumn>Google</TableRowColumn>
-            </TableRow>
-            <TableRow selected={this.isSelected(2)}>
-              <TableRowColumn>3</TableRowColumn>
-              <TableRowColumn>Job 3</TableRowColumn>
-              <TableRowColumn>Facebook</TableRowColumn>
-            </TableRow>
-          </TableBody>
-        </Table>
-          <RaisedButton 
-            containerElement={<Link to="/edit/student/acct" />}
-            label="Edit" 
-            primary={false} 
-            style={buttonStyle} 
-          />
+            <EmpListJobs />
+
+          </CardText>
+          <CardText expandable={true}>
+            <SearchBar
+              onChange={() => console.log('onChange')}
+              onRequestSearch={() => console.log('onRequestSearch')}
+              style={{
+                margin: '0 auto',
+                maxWidth: 800
+              }}
+              hintText="Search ACC student body for skills or fields of proficiency"
+            />
+          </CardText>
+          <CardActions>
+            <FlatButton label="Expand" onClick={this.handleExpand} />
+            <FlatButton label="Reduce" onClick={this.handleReduce} />
+            <RaisedButton 
+              containerElement={<Link to="/edit/employer/acct" />}
+              label="Edit/Update Profile" 
+              secondary={true} 
+              style={style} 
+            />
+          </CardActions>
+        </Card>
       </div>
-      {/* editButton() */}
-    </div>
     );
   }
 }
-
-export default DashStudentPage;
